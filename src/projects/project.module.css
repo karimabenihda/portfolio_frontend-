@@ -1,0 +1,41 @@
+.panel {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.plain {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerFluid {
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.horizGalleryWrapper,
+.horizGalleryStrip {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+  position: relative;
+}
+
+.projectWrap {
+  width: 33vw;
+  padding: 2rem;
+  box-sizing: content-box;
+  flex-shrink: 0;
+}
+
+.projectWrap img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
