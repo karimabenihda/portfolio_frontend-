@@ -6,7 +6,7 @@ import styles from "./Dock.module.css";
 const MIN = 48;
 const MAX = 120;
 const BOUND = MIN * Math.PI;
-
+// About Projects Contact Experiences Skills
 const items = [
   { src: "https://assets.codepen.io/16327/2D-star.png",     alt: "star" },
   { src: "https://assets.codepen.io/16327/2D-wobble.png",   alt: "wobble" },

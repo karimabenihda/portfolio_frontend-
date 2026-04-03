@@ -12,6 +12,7 @@ import About from "@/components/About";
 import Dock from "@/scrollMac/ScrollMac";
 import Footer from "../footer/footer";
 import Project from "@/projects/Projet";
+import ScrollMotionApp from "../ScrollMotionApp/ScrollMotionApp"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -19,19 +20,24 @@ export default function Home() {
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
 
-  useEffect(() => {
-    const smoother = ScrollSmoother.create({
-      wrapper: wrapperRef.current,
-      content: contentRef.current,
-      smooth: 1.5,
-      effects: true,
-      normalizeScroll: true,
-    });
+ useEffect(() => {
+  const smoother = ScrollSmoother.create({
+    wrapper: wrapperRef.current,
+    content: contentRef.current,
+    smooth: 1.5,
+    effects: true,
+    normalizeScroll: true,
+  });
 
-    return () => {
-      smoother.kill();
-    };
-  }, []);
+  // ✅ Tell ALL ScrollTriggers to use the smooth scroller
+  ScrollTrigger.defaults({
+    scroller: "#smooth-content",
+  });
+
+  return () => {
+    smoother.kill();
+  };
+}, []);
 
   return (
     <>
@@ -41,6 +47,7 @@ export default function Home() {
           <main className="flex flex-col w-full relative">
             <Hero />
             <Ticker />
+            <ScrollMotionApp/>
             <Services />
             <About />
             <Project/>
