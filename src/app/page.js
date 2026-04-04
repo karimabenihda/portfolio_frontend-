@@ -13,52 +13,79 @@ import Dock from "@/scrollMac/ScrollMac";
 import Footer from "../footer/footer";
 import Project from "@/projects/Projet";
 import ScrollMotionApp from "../ScrollMotionApp/ScrollMotionApp"
+import Spinner from "@/components/Spinner";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
 
- useEffect(() => {
-  const smoother = ScrollSmoother.create({
-    wrapper: wrapperRef.current,
-    content: contentRef.current,
-    smooth: 1.5,
-    effects: true,
-    normalizeScroll: true,
-  });
+  useEffect(() => {
+    if (isLoading) return;
 
-  // ✅ Tell ALL ScrollTriggers to use the smooth scroller
-  ScrollTrigger.defaults({
-    scroller: "#smooth-content",
-  });
+    const smoother = ScrollSmoother.create({
+      wrapper: wrapperRef.current,
+      content: contentRef.current,
+      smooth: 1.5,
+      effects: true,
+      normalizeScroll: true,
+    });
 
-  return () => {
-    smoother.kill();
-  };
-}, []);
+    ScrollTrigger.defaults({
+      scroller: "#smooth-content",
+    });
+
+    // Refresh ScrollTrigger after a short delay to ensure layout is settled
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    return () => {
+      smoother.kill();
+    };
+  }, [isLoading]);
 
   return (
     <>
-      <Navbar />
-      <div id="smooth-wrapper" ref={wrapperRef}>
-        <div id="smooth-content" ref={contentRef}>
-          <main className="flex flex-col w-full relative">
-            <Hero />
-            <Ticker />
-            <ScrollMotionApp/>
-            <Services />
-            <About />
-            <Project/>
-            {/* Footer */}
-            <footer className="bg-dark-bg py-12 px-6 border-t border-white/5 pb-32">
-             <Footer/>
-            </footer>
-          </main>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <Spinner key="spinner" onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+        style={{
+          visibility: isLoading ? "hidden" : "visible",
+          height: isLoading ? "100vh" : "auto",
+          overflow: isLoading ? "hidden" : "visible"
+        }}
+      >
+        {/* <Navbar /> */}
+        <div id="smooth-wrapper" ref={wrapperRef}>
+          <div id="smooth-content" ref={contentRef}>
+            <main className="flex flex-col w-full relative">
+              <Hero />
+              <Ticker />
+              <ScrollMotionApp />
+              <Services />
+              <About />
+              <Project />
+              {/* Footer */}
+              <footer className="bg-dark-bg py-12 px-6 border-t border-white/5 pb-32">
+                <Footer />
+              </footer>
+            </main>
+          </div>
         </div>
-      </div>
-      <Dock />
+        <Dock />
+      </motion.div>
     </>
   );
 }

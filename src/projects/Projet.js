@@ -1,21 +1,128 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./project.module.css";
+import SpotlightCard from './SpotlightCard';
+import { TbBrandNextjs } from "react-icons/tb";
+import { FaReact, FaLaravel } from "react-icons/fa6";
+import { 
+  SiFastapi, 
+  SiPostgresql, 
+  SiTensorflow, 
+  SiOpencv, 
+  SiPython, 
+  SiHuggingface 
+} from "react-icons/si";
+import { GrMysql, GrDocker } from "react-icons/gr"; // Added GrDocker here
+import { RiGeminiFill } from "react-icons/ri";
+
+import {
+  ExternalLink,
+  Database,
+  Code2,
+  Terminal,
+  BrainCircuit,
+  Box,
+  Layout,
+  Zap,
+  Search,
+  chevronsLeftRightEllipsis,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [
-  "https://assets.codepen.io/16327/portrait-image-1.jpg",
-  "https://assets.codepen.io/16327/portrait-image-2.jpg",
-  "https://assets.codepen.io/16327/portrait-image-3.jpg",
-  "https://assets.codepen.io/16327/portrait-image-4.jpg",
-  "https://assets.codepen.io/16327/portrait-image-5.jpg",
-  "https://assets.codepen.io/16327/portrait-image-6.jpg",
-  "https://assets.codepen.io/16327/portrait-image-7.jpg",
-  "https://assets.codepen.io/16327/portrait-image-8.jpg",
+const projects = [
+  {
+    title: "Hyber-Analyser",
+    description: "Automates analysis of monitoring articles by orchestrating two complementary AI services.",
+    tools: ["Next.js", "FastAPI", "PostgreSQL", "Gemini"],
+    image: "/projects/hybridanalyzer.jpg",
+    live: "https://hybrid-analyzer-lovat.vercel.app/",
+  },
+  {
+    title: "RetentionAI",
+    description: "Predicts employee turnover risk and generates personalized retention plans using AI.",
+    tools: ["Next.js", "FastAPI", "Hugging Face", "PostgreSQL", "Docker"],
+    image: "/projects/retentionai.webp",
+    live: "https://retention-ai-eight.vercel.app/",
+  },
+  {
+    title: "Elan",
+    description: "Manages household supplies with LSTM sales prediction, recommendation system, and chatbot.",
+    tools: ["Next.js", "FastAPI", "TensorFlow/Keras", "PostgreSQL", "Docker"],
+    image: "/projects/Elan.jpg",
+    live: "https://elan-five.vercel.app/",
+  },
+  {
+    title: "Facial Emotion Detection",
+    description: "Detects faces, predicts emotions, and records predictions using CNN and computer vision.",
+    tools: ["TensorFlow/Keras", "OpenCV", "FastAPI", "PostgreSQL"],
+    image: "/projects/emotiondetection.png",
+    live: "https://github.com/karimabenihda/D-tection-d-motions-Faciales-",
+  },
+  {
+    title: "Prediction Temps Livraison",
+    description: "Machine learning regression model for predicting delivery time.",
+    tools: ["Python", "Scikit-learn"],
+    image: "/projects/tempslivraison.jpg",
+    live: "https://github.com/karimabenihda/brief2_Prediction_Temps_Livraison",
+  },
+  {
+    title: "Organizeo",
+    description: "Laravel-based project, member, and task management app for efficient collaboration.",
+    tools: ["Laravel", "MySQL"],
+    image: "/projects/organizeo.jpg",
+    live: "https://github.com/karimabenihda/Organizeo",
+  },
+  {
+    title: "CLASSIK BMC",
+    description: "React application for filling out Business Model Canvas sections digitally.",
+    tools: ["React"],
+    image: "/projects/classik.jpg",
+    live: "https://classic-bmc.vercel.app/",
+  },
 ];
+
+const Sklearn = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 128 128" 
+    width="24" 
+    height="24" 
+    fill="#a78bfa" 
+    style={{ opacity: 1 }}
+  >
+    <path d="M34.04 65.56c-9.07-9.06-22.27-10.57-29.48-3.37c-7.21 7.21-5.7 20.4 3.37 29.46c9.07 9.07 26.4 6.44 29.48 3.37c2.49-2.49 5.71-20.4-3.37-29.46m69.95-28.2c-12.43-12.42-35.17-9.82-50.8 5.8s-11.11 45.48-5.8 50.78c4.29 4.29 35.17 9.82 50.8-5.8c1.11-1.11 2.14-2.25 3.12-3.43c.23-1.56 1.09-3.52 2.6-5.9c-.87.45-1.83.76-2.86.94c-.77 1.41-1.97 2.93-3.61 4.56c-1.89 1.79-3.24 2.96-4.05 3.5s-1.59.81-2.33.81c-1.86 0-2.74-1.64-2.63-4.93c-1.18 1.68-2.27 2.93-3.26 3.73c-1 .8-2.02 1.2-3.09 1.2s-1.92-.48-2.64-1.46c-.57-.76-.91-1.67-1.03-2.71c-1.43 1.4-2.73 2.44-3.88 3.11c-1.19.7-2.5 1.05-3.94 1.05c-1.6 0-2.9-.51-3.88-1.54c-.73-.76-1.18-1.69-1.37-2.8v.02c-1.6 1.47-3.01 2.56-4.22 3.26s-2.36 1.05-3.46 1.05c-1.26 0-2.28-.49-3.05-1.47s-1.16-2.29-1.16-3.94c0-2.47.54-5.44 1.61-8.9s2.37-6.66 3.91-9.58l4.49-1.66c.14-.05.25-.07.32-.07q.51 0 .84.75c.22.5.33 1.18.33 2.02c0 2.4-.55 4.73-1.66 6.98s-2.84 4.65-5.2 7.21c-.09 1.23-.14 2.07-.14 2.53c0 1.03.19 1.84.57 2.44q.57.9 1.5.9c.93 0 1.31-.23 2.03-.69q1.065-.675 3.21-2.79c.15-2.22 1-4.26 2.57-6.09q2.595-3.03 5.76-3.03c1.1 0 1.97.28 2.63.85s.99 1.31.99 2.23c0 2.44-2.59 4.42-7.78 5.94q.705 3.45 3.69 3.45c.78 0 1.52-.21 2.23-.63c.69-.41 1.71-1.29 3.06-2.65c.17-1.34.63-2.64 1.38-3.88c.97-1.6 2.22-2.9 3.74-3.89s2.86-1.49 4.03-1.49c1.47 0 2.51.68 3.09 2.03l3.61-2h.99l-1.56 5.18c-.8 2.6-1.2 4.39-1.2 5.35s.36 1.52 1.08 1.52c.46 0 .96-.24 1.52-.73c.53-.47 1.28-1.18 2.23-2.13c.8-.86 1.54-1.77 2.2-2.74c-1.02-.45-1.52-1.11-1.52-2s.31-1.88.93-2.91s1.47-1.54 2.55-1.54q1.38 0 1.38 1.41c0 .74-.26 1.8-.8 3.18c1.96-.21 3.67-1.71 5.13-4.49l1.21-.05c5.65-13 4.42-27.05-4.42-35.89ZM75.42 66.57c-.18.28-.44.49-.79.64c-.34.15-.73.23-1.16.23c-.72 0-1.26-.15-1.64-.45s-.62-.74-.72-1.33l.93-.15c.05.37.2.66.43.85c.24.2.57.3 1 .3s.75-.09.96-.26s.31-.38.31-.62c0-.21-.09-.38-.28-.5c-.13-.08-.45-.19-.96-.32c-.69-.17-1.16-.32-1.43-.45s-.47-.3-.6-.53c-.14-.22-.21-.47-.21-.74c0-.25.06-.47.17-.68s.27-.38.46-.52c.15-.11.34-.2.59-.27s.52-.11.81-.11c.43 0 .81.06 1.14.19c.33.12.57.29.73.51c.16.21.26.5.32.86l-.92.12c-.04-.28-.16-.51-.36-.67s-.48-.24-.85-.24c-.43 0-.74.07-.92.21s-.28.31-.28.5c0 .12.04.23.11.33c.08.1.2.18.36.25c.09.03.37.11.83.24c.66.18 1.12.32 1.39.43c.26.11.47.28.62.49s.22.48.22.8s-.09.61-.27.88Zm5.14.33q-.615.54-1.53.54c-.76 0-1.36-.25-1.82-.74s-.69-1.2-.69-2.12c0-.6.1-1.12.3-1.57s.5-.78.9-1.01c.4-.22.84-.34 1.32-.34q.9 0 1.47.45c.38.3.63.73.73 1.29l-.91.14c-.09-.37-.24-.65-.46-.84s-.49-.28-.8-.28c-.47 0-.85.17-1.15.51s-.44.87-.44 1.6s.14 1.28.43 1.62c.28.34.66.5 1.11.5c.37 0 .67-.11.92-.34c.25-.22.4-.57.47-1.04l.92.12c-.1.63-.36 1.13-.77 1.49Zm2.52.41h-.94v-5.52h.94zm0-6.55h-.94v-1.08h.94zm4.85 6.55l-1.83-2.82l-.66.63v2.19h-.94v-7.62h.94v4.35l2.22-2.25h1.21l-2.11 2.05l2.33 3.47zm2.84 0h-.94v-5.52h.94zm0-6.55h-.94v-1.08h.94zm2.9 6.62c-.34 0-.6-.05-.79-.16a.87.87 0 0 1-.39-.42c-.08-.18-.11-.54-.11-1.1v-3.18h-.69v-.73h.69v-1.37l.93-.56v1.93h.94v.73h-.94v3.23c0 .27.02.44.05.51c.03.08.09.14.16.18c.07.05.18.07.32.07c.1 0 .24-.01.41-.04l.14.83c-.26.06-.5.08-.71.08Zm-4.71 7.78c.29.37.44.89.44 1.55c0 1.7-.52 3.55-1.56 5.56s-2.16 3.01-3.33 3.01c-.48 0-.88-.2-1.19-.59s-.47-.91-.47-1.55c0-1.68.53-3.53 1.58-5.53s2.17-3 3.35-3c.49 0 .89.18 1.18.56Zm-15.13 1.18c0 2.29-1.51 3.85-4.53 4.7c0-1.9.35-3.44 1.06-4.62c.71-1.19 1.45-1.78 2.23-1.78c.82 0 1.24.57 1.24 1.7m-10.22-9.86c0 1.49-.46 3.26-1.4 5.33c-.93 2.06-2.15 3.93-3.64 5.59c.8-3.91 1.62-6.94 2.45-9.11s1.47-3.26 1.9-3.26c.2 0 .37.13.5.4c.13.26.19.62.19 1.05m64.41 15.8v2.03c-2.72 2.88-5.06 4.31-7 4.31c-.79 0-1.43-.28-1.91-.83s-.73-1.3-.73-2.23c0-1.26.52-3.19 1.56-5.78c.55-1.39.83-2.28.83-2.65s-.15-.57-.44-.57c-.16 0-.38.08-.65.25c-.25.16-.54.4-.87.69q-.435.405-.99.99c-.32.33-.66.71-1.02 1.13l-.99 1.15q-.66.795-.81 1.68c-.18 1-.29 1.92-.35 2.76c-.04.62-.05 1.46-.05 2.53l-3.91.92c-.13-1.59-.19-2.77-.19-3.55c0-.22.01-.43.02-.65c-2.88 2.79-5.11 4.2-6.68 4.2c-.72 0-1.33-.3-1.82-.91s-.74-1.36-.74-2.25c0-.25.03-.51.07-.78c3-3.6 5.38-7.48 7.11-11.47l.4-.02l-1.64 4.52c-.68 1.91-1.13 3.21-1.33 3.9q-.3 1.035-.3 1.83c0 .5.12.89.34 1.18c.23.3.54.44.93.44c.42 0 .83-.14 1.22-.43s1.26-1.09 2.61-2.39c.11-.88.27-1.73.49-2.56c.44-1.7 1.15-3.6 2.13-5.73l4.31-.83c-.91 2.44-1.5 4.36-1.78 5.76c1.93-2.16 3.47-3.65 4.6-4.48s2.14-1.24 3.03-1.24c.6 0 1.1.23 1.5.68s.6 1.02.6 1.7c0 1.13-.51 2.99-1.52 5.58c-.7 1.78-1.04 2.93-1.04 3.46c0 .71.29 1.06.87 1.06c.86 0 2.26-1.14 4.18-3.41Z" />
+  </svg>
+);
+
+const toolMeta = {
+  "next.js":          { icon: <TbBrandNextjs size={13} />,       label: "Next.js" },
+  "react":            { icon: <FaReact size={13} />,       label: "React" },
+  "fastapi":          { icon: <SiFastapi size={13} />,     label: "FastAPI" },
+  "laravel":          { icon: <FaLaravel  size={13} />,     label: "Laravel" },
+  "python":           { icon: <SiPython size={13} />,     label: "Python" },
+  "postgresql":       { icon: <SiPostgresql  size={13} />,     label: "PostgreSQL" },
+  "mysql":            { icon: <GrMysql size={13} />,     label: "MySQL" },
+  "gemini":           { icon: <RiGeminiFill  size={13} />, label: "Gemini" },
+  "hugging face":     { icon: <SiHuggingface  size={13} />, label: "Hugging Face" },
+  "tensorflow/keras": { icon: <SiTensorflow  size={13} />, label: "TensorFlow/Keras" },
+  "docker":           { icon: <GrDocker  size={13} />,          label: "Docker" },
+  "opencv":           { icon: <SiOpencv  size={13} />,          label: "OpenCV" },
+  "scikit-learn":     { icon: <Sklearn size={13} />,       label: "Scikit-learn" },
+};
+
+
+const getToolMeta = (tool) => {
+  const key = tool.toLowerCase();
+  for (const [k, v] of Object.entries(toolMeta)) {
+    if (key.includes(k)) return { ...v, label: tool };
+  }
+  return { icon: <Code2 size={13} />, label: tool };
+};
+
+const isGithub = (url) => url.includes("github.com");
 
 export default function Project() {
   useEffect(() => {
@@ -23,17 +130,7 @@ export default function Project() {
 
     horizontalSections.forEach((sec) => {
       const pinWrap = sec.querySelector(`.${styles.horizGalleryStrip}`);
-
-      let pinWrapWidth;
-      let horizontalScrollLength;
-
-      function refresh() {
-        if (!pinWrap) return;
-        pinWrapWidth = pinWrap.scrollWidth;
-        horizontalScrollLength = pinWrapWidth - window.innerWidth;
-      }
-
-      refresh();
+      if (!pinWrap) return;
 
       gsap.to(pinWrap, {
         scrollTrigger: {
@@ -49,8 +146,6 @@ export default function Project() {
         x: () => -(pinWrap.scrollWidth - window.innerWidth),
         ease: "none",
       });
-
-      ScrollTrigger.addEventListener("refreshInit", refresh);
     });
 
     return () => {
@@ -60,32 +155,218 @@ export default function Project() {
 
   return (
     <>
+      <style>{`
+        .proj-card-inner {
+          display: flex;
+          flex-direction: column;
+          border-radius: 1.5rem;
+          overflow: hidden;
+          // width: 100%;
+        }
+
+        .proj-img-zone {
+          position: relative;
+          height: 180px;
+          flex-shrink: 0;
+          overflow: hidden;
+        }
+
+        .proj-img-zone img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.82;
+          transition: transform 0.6s ease, opacity 0.4s ease;
+          display: block;
+        }
+
+        .proj-wrap:hover .proj-img-zone img {
+          transform: scale(1.05);
+          opacity: 0.95;
+        }
+
+        .proj-img-fade {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 50%;
+          background: linear-gradient(to bottom, transparent, #111);
+          pointer-events: none;
+        }
+
+        .proj-content-zone {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 0.85rem 1rem 0.95rem;
+          background: #111;
+          min-height: 120px;
+        }
+
+        .proj-title {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 0.25rem;
+          letter-spacing: -0.01em;
+          line-height: 1.3;
+        }
+
+        .proj-desc {
+          font-size: 0.72rem;
+          color: rgba(255,255,255,0.42);
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          margin: 0;
+        }
+
+        .proj-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 0.7rem;
+          gap: 0.5rem;
+        }
+
+        .proj-tools {
+          display: flex;
+          gap: 0.3rem;
+          flex-wrap: wrap;
+          flex: 1;
+        }
+
+        .proj-tool-badge {
+          width: 24px;
+          height: 24px;
+          border-radius: 6px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.08);
+          color: #a78bfa;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s, color 0.2s;
+          cursor: default;
+          flex-shrink: 0;
+        }
+
+        .proj-tool-badge:hover {
+          background: rgba(167,139,250,0.18);
+          color: #c4b5fd;
+        }
+
+        .proj-link {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: rgba(167,139,250,0.1);
+          border: 1px solid rgba(167,139,250,0.22);
+          color: #c4b5fd;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          flex-shrink: 0;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s;
+        }
+
+        .proj-link:hover {
+          background: rgba(167,139,250,0.25);
+          border-color: rgba(167,139,250,0.5);
+          transform: scale(1.12);
+        }
+
+        /* ── Responsive overrides ── */
+
+        /* Large screens: bigger image */
+        @media (min-width: 1280px) {
+          .proj-img-zone { height: 200px; }
+          .proj-content-zone { min-height: 130px; }
+          .proj-title { font-size: 0.95rem; }
+        }
+
+        /* Tablet: moderate */
+        @media (max-width: 1024px) {
+          .proj-img-zone { height: 160px; }
+          .proj-content-zone { min-height: 110px; padding: 0.75rem 0.9rem 0.85rem; }
+          .proj-title { font-size: 0.85rem; }
+          .proj-desc { font-size: 0.7rem; }
+        }
+
+        /* Mobile: stacked, full-width */
+        @media (max-width: 640px) {
+          .proj-img-zone { height: 140px; }
+          .proj-content-zone { min-height: 100px; padding: 0.65rem 0.8rem 0.75rem; }
+          .proj-title { font-size: 0.82rem; }
+          .proj-desc { font-size: 0.68rem; -webkit-line-clamp: 3; }
+          .proj-tool-badge { width: 22px; height: 22px; border-radius: 5px; }
+          .proj-link { width: 26px; height: 26px; }
+        }
+      `}</style>
+{/* 
       <section className={`${styles.panel} ${styles.plain}`}>
         <h2 className="text-white text-4xl md:text-8xl font-black uppercase">Projects</h2>
-      </section>
+      </section> */}
 
       <section id="portfolio">
         <div className={styles.containerFluid}>
           <div className={styles.horizGalleryWrapper}>
             <div className={styles.horizGalleryStrip}>
-              {images.map((src, i) => (
-                <div className={styles.projectWrap} key={i}>
+              {projects.map((proj, i) => (
+                <div className={`${styles.projectWrap} proj-wrap `} key={i}>
+                  <SpotlightCard
+                    className="custom-spotlight-card "
+                    spotlightColor="#a78bfa2d"
+                  >
+                    <div className="proj-card-inner">
 
-<div className="group w-full h-full [perspective:1000px] cursor-pointer">
-            <div className="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                {/* Front Side */}
-                <div className="absolute w-full h-full [backface-visibility:hidden] flex items-center justify-center rounded-md bg-white border border-gray-200">
-                    {/* Front Side */}
-                  <img src={src} alt="" className="rounded-2xl" />
-                </div>
-        
-                {/* Back Side */}
-                <div className="absolute w-full h-full [backface-visibility:hidden] flex items-center justify-center rounded-md bg-indigo-600 text-white [transform:rotateY(180deg)]">
-                    Back Side
-                </div>
-            </div>
-        </div>
+                      {/* IMAGE */}
+                      <div className="proj-img-zone">
+                        <img src={proj.image} alt={proj.title} />
+                        <div className="proj-img-fade" />
+                      </div>
 
+                      {/* CONTENT */}
+                      <div className="proj-content-zone">
+                        <div>
+                          <h3 className="proj-title">{proj.title}</h3>
+                          <p className="proj-desc">{proj.description}</p>
+                        </div>
+
+                        <div className="proj-footer">
+                          {/* Tool icon badges */}
+                          <div className="proj-tools">
+                            {proj.tools.map((tool, idx) => {
+                              const meta = getToolMeta(tool);
+                              return (
+                                <div key={idx} className="proj-tool-badge" title={meta.label}>
+                                  {meta.icon}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Link */}
+                          <a
+                            href={proj.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="proj-link"
+                            title={isGithub(proj.live) ? "View on GitHub" : "View Live"}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {isGithub(proj.live)
+                              ? <chevronsLeftRightEllipsis size={12} />
+                              : <ExternalLink size={12} />
+                            }
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </SpotlightCard>
                 </div>
               ))}
             </div>
@@ -93,11 +374,11 @@ export default function Project() {
         </div>
       </section>
 
-      <section className={`${styles.panel} ${styles.plain}`}>
+      {/* <section className={`${styles.panel} ${styles.plain}`}>
         <h2 className="text-white text-4xl md:text-8xl font-black uppercase tracking-tighter">
           Work with us
         </h2>
-      </section>
+      </section> */}
     </>
   );
 }

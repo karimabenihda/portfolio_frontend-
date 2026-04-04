@@ -58,9 +58,8 @@ export default function Navbar() {
 
       {/* Desktop Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-4 md:px-12 ${
-          isScrolled ? "bg-dark-bg/80 backdrop-blur-md shadow-lg py-3 border-b border-white/5" : "bg-transparent"
-        } hidden lg:block`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-4 md:px-12 ${isScrolled ? "bg-dark-bg/80 backdrop-blur-md shadow-lg py-3 border-b border-white/5" : "bg-transparent"
+          } hidden lg:block`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}

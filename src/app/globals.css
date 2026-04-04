@@ -3,7 +3,7 @@
 
 :root {
   --background: #0B0A13;
-  --foreground: #FFFFFF;
+  /* --foreground: #FFFFFF; */
   --primary-purple: #E0A7FF;
   --accent-purple: #CC00FF;
   --dark-bg: #0B0A13;
@@ -31,7 +31,7 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .marquee {
     display: flex;
     white-space: nowrap;
@@ -39,7 +39,12 @@ body {
   }
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }
