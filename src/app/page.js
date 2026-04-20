@@ -16,6 +16,7 @@ import ScrollMotionApp from "../ScrollMotionApp/ScrollMotionApp"
 import Spinner from "@/components/Spinner";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ScrollLoop from "@/components/ScrollLoop";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -37,6 +38,19 @@ export default function Home() {
 
     ScrollTrigger.defaults({
       scroller: "#smooth-content",
+    });
+
+    // Hero fade animation
+    gsap.to(".hero-section", {
+      opacity: 0,
+      scale: 0.9,
+      y: -100,
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "bottom center",
+        scrub: true,
+      }
     });
 
     // Refresh ScrollTrigger after a short delay to ensure layout is settled
@@ -72,10 +86,14 @@ export default function Home() {
           <div id="smooth-content" ref={contentRef}>
             <main className="flex flex-col w-full relative">
               <Hero />
+              <div>
               <Ticker />
+              <ScrollLoop />
+              </div>
+
               <ScrollMotionApp />
-              <Services />
-              <About />
+              {/* <Services />
+              <About /> */}
               <Project />
               {/* Footer */}
               <footer className="bg-dark-bg py-12 px-6 border-t border-white/5 pb-32">

@@ -32,10 +32,28 @@
   height: 100%;
 }
 
+.toolbarIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.toolbarIconWrapper:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 .toolbarImg {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
-}
+}

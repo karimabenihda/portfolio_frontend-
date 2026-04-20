@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap'); */
+
 
 :root {
   --background: #0B0A13;
@@ -18,12 +18,18 @@
   --color-card-bg: var(--card-bg);
   --color-gray-mid: var(--gray-mid);
   --font-outfit: "Outfit", sans-serif;
+  --font-bartle: "BBH Bartle", sans-serif;
+  --font-gruppo: "Gruppo", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
 }
+
+
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-gruppo), sans-serif;
   overflow-x: hidden;
 }
 

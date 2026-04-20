@@ -15,7 +15,7 @@ import {
   SiHuggingface 
 } from "react-icons/si";
 import { GrMysql, GrDocker } from "react-icons/gr"; // Added GrDocker here
-import { RiGeminiFill } from "react-icons/ri";
+import { RiGeminiFill, RiH2 } from "react-icons/ri";
 
 import {
   ExternalLink,
@@ -161,7 +161,7 @@ export default function Project() {
           flex-direction: column;
           border-radius: 1.5rem;
           overflow: hidden;
-          // width: 100%;
+          width: 100%;
         }
 
         .proj-img-zone {
@@ -189,7 +189,7 @@ export default function Project() {
           position: absolute;
           bottom: 0; left: 0; right: 0;
           height: 50%;
-          background: linear-gradient(to bottom, transparent, #111);
+          background: linear-gradient(to bottom, transparent );
           pointer-events: none;
         }
 
@@ -198,7 +198,7 @@ export default function Project() {
           flex-direction: column;
           justify-content: space-between;
           padding: 0.85rem 1rem 0.95rem;
-          background: #111;
+          // background: #111;
           min-height: 120px;
         }
 
@@ -307,9 +307,11 @@ export default function Project() {
       `}</style>
 {/* 
       <section className={`${styles.panel} ${styles.plain}`}>
-        <h2 className="text-white text-4xl md:text-8xl font-black uppercase">Projects</h2>
+        <h2 className="text-white text-4xl md:text-8xl font-black uppercase"></h2>
       </section> */}
-
+<h2 className="font-bartle text-white text-5xl md:text-8xl font-black uppercase text-center py-10">
+Projects
+</h2>
       <section id="portfolio">
         <div className={styles.containerFluid}>
           <div className={styles.horizGalleryWrapper}>
