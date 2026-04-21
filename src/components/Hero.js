@@ -75,6 +75,7 @@ export default function Hero() {
             >
               <Image
                 src="/assets/hero.png"
+                style="width: auto,height:auto"
                 alt="Representative"
                 width={700}
                 height={700}

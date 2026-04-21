@@ -41,8 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
-      <div id="smooth-wrapper" ref={wrapperRef}>
+       <div id="smooth-wrapper" ref={wrapperRef}>
         <div id="smooth-content" ref={contentRef}>
           <main className="flex flex-col w-full relative">
             <Hero />
