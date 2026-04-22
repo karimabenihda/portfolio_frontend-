@@ -1,37 +1,110 @@
-
-
-
-
-
-
-
- .scroll-motion-section {
+.scroll-motion-section {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .main {
   position: relative;
-  height: 300vh; /* tall enough for the scroll path */
+  height: 400vh; /* Increased height for 5 stops */
 }
 
 .container {
   position: absolute;
-  width: 140px;
-  height: 140px;
-  border: 2px dashed rgba(255,255,255,0.15);
-  border-radius: 10px;
+  width: 80px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+}
+
+.marker {
+  cursor: pointer;
+  z-index: 20;
 }
 
 .box {
-  width: 100px;
-  height: 100px;
-  z-index: 10;
-  border-radius: 10px;
-  background-image: url("https://assets.codepen.io/16327/flair-26.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute; /* ✅ needed for motionPath to work */
+  width: 60px;
+  height: 60px;
+  z-index: 30;
+  border-radius: 50%;
+  background: radial-gradient(circle, #CC00FF 0%, rgba(204,0,255,0) 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.container .box img {
+    filter: drop-shadow(0 0 15px #CC00FF);
+}
+
+.gsap-final {
+  margin-top: 50vh;
+}
+
+/* Custom positioning for better flow */
+.initial { left: 15%; top: 5%; }
+.second { right: 15%; top: 25%; }
+.third { left: 15%; top: 45%; }
+.fourth { right: 15%; top: 65%; }
+.fifth { left: 15%; top: 85%; }
+
+@media (max-width: 768px) {
+  .main {
+    height: 500vh;
+  }
+  .container {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+  
+  .container div[class*="absolute"] {
+    left: 50% !important;
+    right: auto !important;
+    top: 120% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+
+/* Custom spin for the pin outer ring */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Premium Grain Texture */
+.journey-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Tech Scanline Effect */
+.journey-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.01) 0px,
+    rgba(255, 255, 255, 0.01) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* Motion Smoothing for the SVG Pin */
+.motion-box svg {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
