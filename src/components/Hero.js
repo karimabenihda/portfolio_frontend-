@@ -73,7 +73,7 @@ export default function Hero() {
           <div className="absolute bottom-10 z-20 flex gap-4 bg-white/10 backdrop-blur-md p-2 rounded-full border border-white/20">
             <Link 
               href="#portfolio" 
-              className="bg-[#d8cae9] text-[#23222a] !px-8 !py-2.5 rounded-full font-medium flex items-center gap-2 hover:bg-[#d8cae9bd] transition-colors"
+              className="bg-[ #d8cae9] text-[ #23222a] !px-8 !py-2.5 rounded-full font-medium flex items-center gap-2 hover:bg-[#d8cae9bd] transition-colors"
             >
               Portfolio ↗
             </Link>

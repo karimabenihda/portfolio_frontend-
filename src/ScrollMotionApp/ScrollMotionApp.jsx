@@ -1,65 +1,31 @@
-"use client"
-import { useEffect, useRef } from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { TextPlugin } from "gsap/TextPlugin"; // Import TextPlugin
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, TextPlugin);
 
 const experiences = [
-  { 
-    type: "EDUCATION",
-    title: "Digital Development Diploma - DTS",
-    institution: "OFPPT Ait Melloul",
-    date: "2023 - 2025",
-    description: "Full-Stack Web Option. Focused on modern web architectures and system design."
-  },
-  { 
-    type: "INTERN",
-    title: "Arabic and Quran Platform",
-    institution: "DeveloppeurInformatique.ma",
-    date: "Mar 2025 – May 2025",
-    description: "Built responsive UIs using React and Tailwind CSS, focusing on accessibility."
-  },
-  { 
-    type: "INTERN",
-    title: "Cash-on-Delivery Sales Platform",
-    institution: "Technopeck",
-    date: "July 2025 – Sep 2025",
-    description: "Developed secure landing pages and optimized database queries using Laravel."
-  },
-  { 
-    type: "BOOTCAMP",
-    title: "AI Certification",
-    institution: "Simplon Maghreb",
-    date: "Sep 2025 - Mar 2026",
-    description: "Specialized in AI-driven development, focusing on Python and MLOps workflows."
-  },
-  { 
-    type: "FREELANCE",
-    title: "Fullstack & AI Developer",
-    institution: "ZHAcamedy",
-    date: "Mar 2026 - Apr 2026",
-    description: "Architected high-performance UI components for the Vantery SaaS platform."
-  },
-  { 
-    type: "FREELANCE",
-    title: "Fullstack & AI Developer",
-    institution: "DISIS MAROC",
-    date: "Apr 2026 - May 2026",
-    description: "Redesigned e-commerce infrastructure for improved performance and UX conversion."
-  },
+  { branch: "main", command: "git init DTS Diploma", title: "Education: DTS Digital Development", institution: "OFPPT: ISTA Ait Melloul", date: "Sep 2023 - Jun 2025", hash: "a7b2c91cfb5320cb92e045a988aaa633f92", desc: "Initialized project: Digital Development Diploma. Full-Stack Web Option." },
+  { branch: "feature", command: "git checkout -b feat/arabic-quran-platform", title: "Front-end Internship", institution: "DeveloppeurInformatique.ma", date: "March 2025 – May 2025 ", hash: "4f8e12a656b84f47b58eb1ada5490703ab26", desc: "Designed and developed modern, responsive UIs using React and Tailwind CSS to enhance user experience." },
+  { branch: "feature", command: "git commit -m 'Add COD Sales Platform'", title: "Front-end Internship", institution: "Technopeck", date: "July 2025 – September 2025", hash: "9d1s3k0b5320cb92e045a988aaa633f92a1", desc: "Developing a responsive and secure landing page in Laravel Blade, enhancing usability and improving user engagement." },
+  { branch: "main", command: "git merge feat/ai-certification", title: "AI Certification Bootcamp", institution: "Simplon Maghreb", date: "Sep 2025 - March 2026", hash: "v8n2m5qcfb5320cb92e045a988aaa633f92z", desc: "Merging web development expertise with MLOps & AI technologies, including machine learning, deep learning, and NLP, to build innovative solutions." },
+  { branch: "feature", command: "git checkout -b feat/saas-scaling", title: "Freelance Fullstack Developer", institution: "ZHAcamedy", date: "Mon Apr 05 2024", hash: "z0p4l1w656b84f47b58eb1ada5490703ab26", desc: "Developing high-performance UI components for Vantery SaaS." },
+  { branch: "main", command: "git tag -a v1.0.0", title: "E-commerce Redesign", institution: "DISIS MAROC", date: "Thu Apr 24 2026", hash: "r6t9u2ycfb5320cb92e045a988aaa633f92b", desc: "Final infrastructure redesign and e-commerce optimization." },
 ];
 
-export default function ScrollMotionApp() {
+export default function GitGraphJourney() {
   const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const lastIndex = useRef(-1);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
       const markers = gsap.utils.toArray(".marker");
       const box = document.querySelector(".motion-box");
       
-      // Calculate coordinates relative to the container
       const points = markers.map((marker) => ({
         x: marker.offsetLeft + marker.offsetWidth / 2 - box.offsetWidth / 2,
         y: marker.offsetTop + marker.offsetHeight / 2 - box.offsetHeight / 2,
@@ -68,94 +34,114 @@ export default function ScrollMotionApp() {
       gsap.to(box, {
         scrollTrigger: {
           trigger: ".journey-container",
-          start: "top 20%",
-          end: "bottom 80%",
-          scrub: 1.5, // Smoother follow
+          start: "top 10%",
+          end: "bottom 90%",
+          scrub: 1,
+          onUpdate: (self) => {
+            const index = Math.round(self.progress * (experiences.length - 1));
+            setActiveIndex(index);
+
+            // Typing Trigger: Only run if we moved to a NEW index
+            if (index !== lastIndex.current) {
+              lastIndex.current = index;
+              const targetElement = document.querySelector(`#command-${index}`);
+              if (targetElement) {
+                gsap.to(targetElement, {
+                  duration: 0.5,
+                  text: experiences[index].command,
+                  ease: "none",
+                });
+              }
+            }
+          }
         },
-        motionPath: {
-          path: points,
-          curviness: 1.5,
-          autoRotate: true,
-        },
+        motionPath: { path: points, curviness: 1.2 },
         ease: "none",
       });
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="journey-container relative py-32 bg-[#050505] text-white overflow-hidden">
+    <section ref={containerRef} className="journey-container relative bg-[#0a0a0a] text-[#f8f8f2] overflow-hidden font-mono">
       
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-[#5227FF] to-transparent" />
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-[#5227FF] to-transparent" />
-      </div>
-
-      <header className="text-center mb-32 relative z-10">
-        <span className="text-[#5227FF] font-mono text-xs tracking-[0.5em] uppercase mb-4 block">Chronicles</span>
-        <h2 className="font-bartle text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none">
-          My Journey
-        </h2>
+      {/* Header: Mac Terminal Style */}
+      <header className="max-w-3xl !mx-auto !mb-12 relative z-10 !px-4">
+        <div className="bg-[#2d2d2d] rounded-t-lg !p-3 flex items-center gap-2 border-b border-black/20">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+          </div>
+          <div className="text-[11px] text-gray-400 mx-auto">karimabenihda — zsh — 80×24</div>
+        </div>
+        <div className="bg-[#1e1e1e] !p-6 rounded-b-lg shadow-2xl border border-white/5">
+          <span className="text-[#a6e22e]">[karima@portfolio-MacBook-Air]</span>
+          <span className="text-white !ml-2">% git log --oneline --graph</span>
+        </div>
       </header>
 
-      <div className="relative max-w-6xl mx-auto px-6">
+
+      <div className="relative max-w-6xl !mx-auto !px-6">
         
-        {/* THE INNOVATIVE TRACKER (PIN) */}
-        <div className="motion-box absolute z-50 pointer-events-none flex items-center justify-center w-12 h-12">
-          <div className="absolute w-14 h-14 border border-[#5227FF]/20 rounded-full animate-[spin_6s_linear_infinite]" />
-          <div className="absolute w-10 h-10 border border-[#5227FF]/40 rounded-full animate-ping opacity-20" />
-          <div className="relative flex items-center justify-center">
-            <div className="absolute inset-0 bg-[#5227FF] rounded-full blur-xl opacity-40 scale-150" />
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5227FF" strokeWidth="2.5" className="drop-shadow-[0_0_15px_#5227FF]">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-          </div>
+        {/* Pink Pointer */}
+        <div className="motion-box absolute z-50 pointer-events-none w-10 h-10 flex items-center justify-center">
+          <div className="w-3 h-3 bg-[#ff79c6] rounded-full shadow-[0_0_15px_#ff79c6]" />
+          <div className="absolute inset-0 bg-[#ff79c6]/20 rounded-full animate-ping" />
         </div>
 
-        {/* TIMELINE ITEMS */}
-        <div className="flex flex-col gap-32 relative">
-          {/* Central Path (Visual Only) */}
-          <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-full bg-white/5 hidden md:block" />
-
+        <div className="flex flex-col   relative">
           {experiences.map((item, i) => (
-            <div 
-              key={i} 
-              className={`flex flex-col md:flex-row items-center w-full ${
-                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-              }`}
-            >
-              {/* Card Content */}
-              <div className="w-full md:w-[42%] group">
-                <div className="relative p-8 bg-[#0D0D0D] border border-white/5 rounded-2xl hover:border-[#5227FF]/40 transition-all duration-700 hover:shadow-[0_0_60px_rgba(82,39,255,0.1)]">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-[9px] font-bold tracking-[0.2em] text-[#5227FF] bg-[#5227FF]/10 px-3 py-1 rounded-sm uppercase">
-                      {item.type}
-                    </span>
-                    <span className="text-[10px] text-gray-500 font-mono tracking-widest">{item.date}</span>
+            <div key={i} className={`flex items-center w-full ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
+              
+              <div className="w-full md:w-[46%]">
+                <div className={`
+                  relative transition-all duration-500 rounded-lg overflow-hidden border
+                  ${i === activeIndex 
+                    ? "bg-[#1e1e1e] border-white/20 shadow-2xl scale-100 opacity-100" 
+                    : "bg-transparent border-transparent opacity-10 blur-[2px] scale-95"}
+                `}>
+                  {/* The Typing Command Line */}
+                  <div className="bg-[#2d2d2d]/50 !px-4 !py-2 text-[12px] flex items-center gap-2 border-b border-white/5 font-bold">
+                     <span className="text-[#a6e22e]">➜</span>
+                     <span className="text-[#66d9ef]">~/{item.branch}</span>
+                     <span className="text-white/90">
+                        $<span id={`command-${i}`} className="!ml-1 border-r-2 border-[#ff79c6] !pr-1">
+                           {/* GSAP will type the text here */}
+                        </span>
+                     </span>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-white transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-6">
-                    {item.institution}
-                  </p>
-                  <p className="text-sm text-gray-500 leading-relaxed font-light italic">
-                    "{item.description}"
-                  </p>
+
+                  {/* Terminal Output (The Result) */}
+                  <div className={`!p-5 text-[13px] leading-relaxed transition-opacity duration-1000 ${i === activeIndex ? "opacity-100" : "opacity-0"}`}>
+                    <div className="flex flex-wrap gap-2 !mb-1">
+                      <span className="text-[#f1fa8c]">commit {item.hash.substring(0, 7)}</span>
+                      <span className="text-[#66d9ef] font-bold">(HEAD -&gt; <span className="text-[#ff79c6]">{item.branch}</span>)</span>
+                    </div>
+                    
+                    <div className="text-[#f8f8f2] !mb-4 !pl-1 opacity-80">
+                      <p>Author: Karima Ben Ihda &lt;dev@karima.ai&gt;</p>
+                      <p>Date: {item.date}</p>
+                    </div>
+                    
+                    <div className="!pl-6 border-l border-white/10 !mb-2">
+                      <h3 className="text-[#a6e22e] font-bold text-base !mb-1">{item.title}</h3>
+                      <p className="text-gray-400 italic text-[11px] !mb-2">{item.institution}</p>
+                      <p className="text-white/70">{item.desc}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Dynamic Marker Stop */}
-              <div className="marker relative my-12 md:my-0 w-3 h-3 rounded-full bg-white/10 z-10 mx-auto transition-transform duration-500 group-hover:scale-150">
-                 <div className="absolute inset-0 bg-[#5227FF] rounded-full blur-sm opacity-0 group-hover:opacity-100" />
-              </div>
+              {/* Marker (Node) */}
+              <div className={`marker relative w-5 h-5 rounded-full z-10 mx-auto transition-all duration-700
+                ${item.branch === "main" ? "-translate-x-8" : "translate-x-8"}
+                ${i === activeIndex 
+                  ? "bg-[#ff79c6] border-4 border-white shadow-[0_0_20px_#ff79c6]" 
+                  : "bg-[#333] border-2 border-white/10"}
+              `} />
 
-              {/* Spacer */}
-              <div className="hidden md:block w-[42%]" />
+              <div className="hidden md:block w-[46%]" />
             </div>
           ))}
         </div>

@@ -4,11 +4,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TrueFocus from './TrueFocus';
 import DecryptedText from './DecryptedText';
 import DotField from './DotField';
+import ProfileCard from './ProfileCard'
+import ASCIIText from './ASCIIText';
 
 
 
 
 
+
+ 
+
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,20 +31,20 @@ const SKILLS = {
 
 const ACCENT_COLORS = {
   "Frontend": "#00c8ff",
-  "Backend": "#39ff14",
+  "Backend": "#a73fa3",
   "AI / ML": "#7f5af0",
   "Databases": "#ffd600",
   "DevOps & Tools": "#ff3c3c",
   "Monitoring": "#00c8ff",
-  "Testing": "#39ff14",
+  "Testing": "#a73fa3",
   "Methods": "#7f5af0",
 };
 
 const PANELS = [
   { id: "intro", type: "intro", color: "#060606", label: "Intro" },
-  { id: "1", color: "#0a0a0a", accent: "#39ff14", label: "01" },
+  { id: "1", color: "#0a0a0a", accent: "#a73fa3", label: "01" },
   { id: "2", color: "#0d0d0d", accent: "#ff3c3c", label: "02" },
-  { id: "3", color: "#080814", accent: "#7f5af0", label: "03" },
+  { id: "3", color: "#080814", accent: "#39ff14", label: "03" },
   { id: "4", color: "#0a0a0a", accent: "#ffd600", label: "04" },
   { id: "5", color: "#080d14", accent: "#00c8ff", label: "05" },
 ];
@@ -56,16 +62,16 @@ function Panel01() {
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1rem" }}>
           about me
         </p>
-        <h2 className=" font-bartle text-white text-5xl md:text-9xl font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#39ff14", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
+        <h2 className=" font-bartle text-white text-5xl md:text-9xl font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#a73fa3", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
           Who am I ?
         </h2>
-        <p style={{ fontSize: "0.8rem", fontWeight:"100", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+        {/* <p style={{ fontSize: "0.8rem", fontWeight:"100", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
           Full-Stack &amp; AI Developer building web apps and AI-powered products —
           from pixel-perfect UIs to LLM pipelines and ML systems.Looking to grow my skills and gain real-world experience through innovative, impactful projects. 
-        </p>
+        </p> */}
         <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
           {[ "Frontend Developement","Backend Developement", "Machine Learning", "Deep Learning", "AI / LLMs"].map(tag => (
-            <span key={tag} style={{ border: "1px solid rgba(57,255,20,0.4)", color: "#39ff14", padding: "0.25rem 0.75rem", borderRadius: "999px", fontSize: "0.6rem", letterSpacing: "0.12em", fontFamily: "'DM Mono', monospace" }}>
+                <span key={tag} style={{ border: "1px solid #a73fa47e", color: "rgba(255,255,255,0.7)", padding: "0.25rem 0.65rem", borderRadius: "999px", fontSize: "0.65rem", letterSpacing: "0.08em" }}>
               {tag}
             </span>
           ))}
@@ -87,7 +93,7 @@ function Panel01() {
         <div style={{ padding: "16px 18px", fontFamily: "'DM Mono', monospace", fontSize: "0.72rem", lineHeight: 1.85 }}>
           <div>
             <span style={{ color: "#818cf8" }}>const</span>{" "}
-            <span style={{ color: "#f43f5e" }}>developer</span>{" "}
+            <span style={{ color: "#ea8ae7" }}>developer</span>{" "}
             <span style={{ color: "rgba(255,255,255,0.4)" }}>=</span>{" "}
             <span style={{ color: "rgba(255,255,255,0.4)" }}>{"{"}</span>
           </div>
@@ -124,7 +130,7 @@ function Panel01() {
           <div style={{ paddingLeft: "1.2rem" }}>
             <span style={{ color: "#34d399" }}>available</span>
             <span style={{ color: "rgba(255,255,255,0.3)" }}>: </span>
-            <span style={{ color: "#4ade80" }}>true</span>
+            <span style={{ color: "#facc15" }}>true</span>
           </div>
 
           <div style={{ color: "rgba(255,255,255,0.3)" }}>{"}"}</div>
@@ -132,8 +138,8 @@ function Panel01() {
 
         {/* Available badge */}
         <div style={{ padding: "10px 18px 14px", display: "flex", justifyContent: "flex-end" }}>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", border: "1px solid rgba(57,255,20,0.3)", borderRadius: "999px", padding: "0.3rem 0.8rem", fontSize: "0.6rem", color: "#39ff14", letterSpacing: "0.1em" }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#39ff14", display: "inline-block", animation: "pulse 2s ease-in-out infinite" }} />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: "6px", border: "1px solid #a73fa47e", borderRadius: "999px", padding: "0.3rem 0.8rem", fontSize: "0.6rem", color: "#ea8ae7", letterSpacing: "0.1em" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#a73fa3", display: "inline-block", animation: "pulse 2s ease-in-out infinite" }} />
             available for hire
           </span>
         </div>
@@ -180,17 +186,17 @@ function Panel03() {
       {/* <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1.5rem", textAlign: "center" }}>
         tools · devops · methods
       </p> */}
-            <h2 className=" font-bartle text-white text-4xl md:text-7xl font-black uppercase leading-none max-w-7xl mx-auto" style={{  lineHeight: 0.9, color: "#7f5af0", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
+            <h2 className=" font-bartle text-white text-4xl md:text-7xl font-black uppercase leading-none max-w-7xl mx-auto" style={{  lineHeight: 0.9, color: "#39ff14", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
 tools · devops · methods      </h2>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem" }}>
         {groups.map(group => (
           <div key={group}>
-            <p style={{ fontSize: "0.55rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#7f5af0", marginBottom: "0.75rem", fontFamily: "'DM Mono', monospace" }}>
+            <p style={{ fontSize: "0.55rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#39ff14", marginBottom: "0.75rem", fontFamily: "'DM Mono', monospace" }}>
               {group}
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
               {SKILLS[group].map(s => (
-                <span key={s} style={{ border: "1px solid rgba(127,90,240,0.35)", color: "rgba(255,255,255,0.7)", padding: "0.25rem 0.65rem", borderRadius: "999px", fontSize: "0.65rem", letterSpacing: "0.08em" }}>
+                <span key={s} style={{ border: "1px solid rgba(57,255,20,0.4))", color: "rgba(255,255,255,0.7)", padding: "0.25rem 0.65rem", borderRadius: "999px", fontSize: "0.65rem", letterSpacing: "0.08em" }}>
                   {s}
                 </span>
               ))}
@@ -344,7 +350,46 @@ export default function ScrollLoop() {
 
     return () => ctx.revert();
   }, []);
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15, // Smooth stagger between text lines
+      delayChildren: 0.4,    // Gives time for the spinner glitch to clear
+    }
+  }
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 15, filter: "blur(8px)" },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.85, rotateY: 15, x: 20 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    rotateY: 0, 
+    x: 0,
+    transition: { duration: 1, ease: "easeOut", delay: 0.6 } 
+  }
+};
+
+const FlashEffect = () => (
+  <motion.div 
+    initial={{ opacity: 0.8 }}
+    animate={{ opacity: 0 }}
+    transition={{ duration: 0.4 }}
+    className="absolute inset-0 bg-[#a73fa3] z-[60] pointer-events-none" 
+  />
+);
   return (
     <>
       <style>{`
@@ -449,55 +494,114 @@ export default function ScrollLoop() {
         }
       `}</style>
 
-     <div 
-  className='bg-[url("https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png")] bg-cover relative min-h-screen w-full justify-center overflow-hidden scroll-loop-container' 
+<div  className='bg-[url("https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png")] bg-cover relative min-h-screen w-full justify-center overflow-hidden scroll-loop-container' 
   ref={containerRef}
 >
   {/* ── Background Layer ── */}
-  <div className="absolute inset-0 z-0 pointer-events-none">
-    <DotField
-      dotRadius={1.5}
-      dotSpacing={14}
-      bulgeStrength={67}
-      glowRadius={160}
-      sparkle={false}
-      waveAmplitude={0}
-      cursorRadius={500}
-      cursorForce={0.1}
-      bulgeOnly
-      gradientFrom="#A855F7"
-      gradientTo="#B497CF"
-      glowColor="#120F17"
-    />
-  </div>
-
-  {/* ── Content Layer ── */}
-  <div className="relative z-10 w-full min-h-screen">
-    {/* ── Intro Panel ── */}
-    <div className="panel panel--intro min-h-screen flex flex-col items-center justify-center">
-      <div className="text-center">
-        <h2 className="font-bartle text-white text-3xl md:text-6xl font-black uppercase leading-none !max-w-7xl !mx-auto">
-          <DecryptedText text="This is !" />
-        </h2>
-        <br />
-        <h2 className="font-bartle text-white text-5xl md:text-9xl font-black uppercase leading-none !max-w-7xl !mx-auto">
-          <TrueFocus 
-            sentence="KARIMA BENIDA" 
-            manualMode={false}
-            blurAmount={5}
-            borderColor="#5227FF"
-            animationDuration={0.5}
-            pauseBetweenAnimations={1}
-          />
-        </h2>
-      </div>
-      
-      <div className="scroll-hint">
-        <span className="scroll-hint__label">scroll</span>
-        <div className="scroll-hint__line" />
-      </div>
+    <div className="absolute inset-0 z-0 pointer-events-none">
+      <DotField
+        dotRadius={1.5}
+        dotSpacing={14}
+        bulgeStrength={67}
+        glowRadius={160}
+        sparkle={false}
+        waveAmplitude={0}
+        cursorRadius={500}
+        cursorForce={0.1}
+        bulgeOnly
+        gradientFrom="#a73fa3"
+        gradientTo="#B497CF"
+        glowColor="#120F17"
+      />
     </div>
 
+    {/* ── Content Layer ── */}
+  <div className="relative z-10 w-full min-h-screen">
+      {/* ── Intro Panel ── */}
+<motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="panel panel--intro min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+    >
+      <FlashEffect />
+
+      <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl mx-auto !px-6 gap-12">
+        
+        {/* LEFT SIDE: TEXT */}
+        <div className="flex-1 text-left">
+          
+          <motion.div variants={itemVariants} className="font-bartle text-white/70 text-2xl md:text-3xl leading-tight !mb-4">
+            <DecryptedText text="This is" />
+          </motion.div>
+          
+          <div className="space-y-8">
+            <motion.div variants={itemVariants} className="font-bartle text-white text-4xl md:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight">
+              <TrueFocus 
+                sentence="KARIMA BENIHDA" 
+                manualMode={false}
+                blurAmount={5}
+                borderColor="#a73fa3"
+                animationDuration={0.5}
+                pauseBetweenAnimations={1}
+              />
+            </motion.div>
+            
+            <motion.div variants={itemVariants} className="relative max-w-2xl !mt-8">
+              <div className="relative border-l-4 border-[#a73fa3] !pl-6 !py-4 bg-gradient-to-r from-[#a73fa3]/5 to-transparent">
+                <div className="absolute -left-3 top-0 bg-[#0a0a0a] p-1.5">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-[#a73fa3]">
+                    <path d="M14.017 21L14.017 18C14.017 14.6863 16.7033 12 20.017 12V6H14.017V12H17.017C17.017 13.6569 15.6739 15 14.017 15V21ZM4.017 21V18C4.017 14.6863 6.7033 12 10.017 12V6H4.017V12H7.017C7.017 13.6569 5.6739 15 4.017 15V21Z" fill="currentColor" />
+                  </svg>
+                </div>
+
+                <p className="text-white/80 text-base md:text-lg font-light leading-relaxed tracking-wide" style={{ fontFamily: "'DM Mono', monospace" }}>
+                  Building the future of the web by fusing robust Fullstack architecture with the predictive power of Machine Learning.
+                </p>
+
+                <div className="absolute bottom-0 left-0 w-24 h-0.5 bg-gradient-to-r from-[#a73fa3] to-transparent" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE: PROFILE CARD (No more {...props} error) */}
+        <motion.div variants={cardVariants} className="flex-1 flex justify-center lg:justify-end">
+          <div className="  relative z-10 transform scale-95 md:scale-110">
+            <ProfileCard
+              name="Karima BENIHDA"
+              title="Full-Stack & AI Developer"
+              handle="javicodes"
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl="/assets/hero_karima.png"
+              showUserInfo={false}
+              enableTilt={true}
+              enableMobileTilt={false}
+              behindGlowColor="#a73fa387"
+              iconUrl="/assets/binary.jpg"
+              behindGlowEnabled
+              innerGradient="linear-gradient(145deg, #a73fa387 0%, #71C4FF44 100%)"
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll Hint */}
+      <motion.div 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ delay: 2 }} 
+        className="scroll-hint absolute bottom-8"
+      >
+        <span className="scroll-hint__label">scroll</span>
+        <motion.div 
+          animate={{ y: [0, 8, 0] }} 
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} 
+          className="scroll-hint__line" 
+        />
+      </motion.div>
+    </motion.div>
     {/* ── Numbered Panels ── */}
     {PANELS.slice(1).map((p, i) => {
       const Content = PANEL_CONTENT[i];

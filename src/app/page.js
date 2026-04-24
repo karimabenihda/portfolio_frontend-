@@ -111,7 +111,7 @@ export default function Home() {
               <ScrollMotionApp />
               {/* <Services />
               <About /> */}
-              {/* <Project /> */}
+              <Project />
               {/* Footer */}
               <footer className="bg-dark-bg py-12 px-6 border-t border-white/5 pb-32">
                 <Footer />

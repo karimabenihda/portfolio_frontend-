@@ -11,8 +11,7 @@
 
 .focus-word {
   position: relative;
-  font-size: 4rem;
-  font-weight: 900;
+ 
   cursor: pointer;
   transition:
     filter 0.3s ease,
