@@ -107,8 +107,11 @@ export default function Home() {
               {/* <Ticker /> */}
               <ScrollLoop />
               </div>
+<div className="!py-10">
 
               <ScrollMotionApp />
+</div>
+
               {/* <Services />
               <About /> */}
               <Project />
