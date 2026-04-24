@@ -62,7 +62,7 @@ function Panel01() {
         <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1rem" }}>
           about me
         </p>
-        <h2 className=" font-bartle text-white text-5xl md:text-9xl font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#a73fa3", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
+        <h2 className=" font-bartle text-white text-3xl md:text-6xl lg:text-9xl font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#a73fa3", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
           Who am I ?
         </h2>
         {/* <p style={{ fontSize: "0.8rem", fontWeight:"100", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
@@ -157,7 +157,7 @@ function Panel02() {
       {/* <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1.5rem", textAlign: "center" }}>
         skills · stack
       </p> */}
-         <h2 className=" font-bartle text-white text-4xl md:text-8xl font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#ff3c3c", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
+         <h2 className=" font-bartle text-white  text-3xl md:text-4xl lg:text-7xl  font-black uppercase leading-none max-w-7xl mx-auto" style={{ fontSize: "6rem", fontWeight:"800", lineHeight: 0.9, color: "#ff3c3c", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
 skills stack       </h2>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem" }}>
         {groups.map(group => (
@@ -186,7 +186,7 @@ function Panel03() {
       {/* <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1.5rem", textAlign: "center" }}>
         tools · devops · methods
       </p> */}
-            <h2 className=" font-bartle text-white text-4xl md:text-7xl font-black uppercase leading-none max-w-7xl mx-auto" style={{  lineHeight: 0.9, color: "#39ff14", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
+               <h2 className=" font-bartle text-white  text-3xl md:text-4xl lg:text-6xl  font-black uppercase leading-none max-w-7xl mx-auto" style={{  fontWeight:"800", lineHeight: 0.9, color:"#39ff14", marginBottom: "1.25rem", letterSpacing: "0.02em" }}>
 tools · devops · methods      </h2>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem" }}>
         {groups.map(group => (
